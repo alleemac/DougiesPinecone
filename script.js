@@ -27,7 +27,6 @@ let highScore = getSavedHighScore();
 
 // ----------------------
 // IMAGE ASSETS
-// Replace these placeholder filenames with your actual PNGs
 // ----------------------
 const dougieStand = new Image();
 dougieStand.src = "Dougie-Pixel-sprite-idle.PNG";
@@ -40,12 +39,6 @@ dougieRunLeft.src = "dougierunleft.png";
 
 const dougieRunRight = new Image();
 dougieRunRight.src = "dougierunright.png";
-
-const dougieBasket = new Image();
-dougieBasket.src = "Dougie-Pixel-sprite-idle.PNG";
-
-const dougieHappy = new Image();
-dougieHappy.src = "Dougie-Pixel-sprite-idle.PNG";
 
 // ----------------------
 // GAME STATE
@@ -346,31 +339,22 @@ function drawPixelCloud(x, y, scale = 1) {
 // DOUGIE
 // ----------------------
 function getCurrentDougieImage() {
-  // Jump image has top priority while airborne
+  // Jump sprite while airborne
   if (dougie.isJumping && imageIsReady(dougieJump)) {
     return dougieJump;
   }
 
-  // Running images while moving on the ground
+  // Running left
   if (dougie.movingLeft && imageIsReady(dougieRunLeft)) {
     return dougieRunLeft;
   }
 
+  // Running right
   if (dougie.movingRight && imageIsReady(dougieRunRight)) {
     return dougieRunRight;
   }
 
-  // Happy image after catching a pinecone
-  if (happyTimer > 0 && imageIsReady(dougieHappy)) {
-    return dougieHappy;
-  }
-
-  // Basket image as a default gameplay pose
-  if (imageIsReady(dougieBasket)) {
-    return dougieBasket;
-  }
-
-  // Standing image as backup
+  // Idle is ALWAYS the default standing sprite
   if (imageIsReady(dougieStand)) {
     return dougieStand;
   }
@@ -378,60 +362,17 @@ function getCurrentDougieImage() {
   return null;
 }
 
-function drawFallbackDougie() {
-  const centerX = dougie.x + dougie.width / 2;
-
-  ctx.fillStyle = ouchTimer > 0 ? "#2d7d36" : "#2f8f3a";
-
-  ctx.beginPath();
-  ctx.moveTo(centerX, dougie.y);
-  ctx.lineTo(dougie.x + 12, dougie.y + 78);
-  ctx.lineTo(dougie.x + dougie.width - 12, dougie.y + 78);
-  ctx.closePath();
-  ctx.fill();
-
-  ctx.beginPath();
-  ctx.moveTo(centerX, dougie.y + 28);
-  ctx.lineTo(dougie.x, dougie.y + 118);
-  ctx.lineTo(dougie.x + dougie.width, dougie.y + 118);
-  ctx.closePath();
-  ctx.fill();
-
-  ctx.fillStyle = "#ffffff";
-
-  ctx.beginPath();
-  ctx.arc(centerX - 16, dougie.y + 88, 6, 0, Math.PI * 2);
-  ctx.arc(centerX + 16, dougie.y + 88, 6, 0, Math.PI * 2);
-  ctx.fill();
-
-  ctx.fillStyle = "#222";
-
-  ctx.beginPath();
-  ctx.arc(centerX - 15, dougie.y + 88, 2.5, 0, Math.PI * 2);
-  ctx.arc(centerX + 17, dougie.y + 88, 2.5, 0, Math.PI * 2);
-  ctx.fill();
-
-  ctx.strokeStyle = ouchTimer > 0 ? "#91442f" : "#222";
-  ctx.lineWidth = 2;
-
-  ctx.beginPath();
-
-  if (ouchTimer > 0) {
-    ctx.arc(centerX, dougie.y + 106, 9, Math.PI, Math.PI * 2);
-  } else {
-    ctx.arc(centerX, dougie.y + 100, 11, 0, Math.PI);
-  }
-
-  ctx.stroke();
-}
-
 function drawDougie() {
   const currentImage = getCurrentDougieImage();
 
   if (currentImage) {
-    ctx.drawImage(currentImage, dougie.x, dougie.y, dougie.width, dougie.height);
-  } else {
-    drawFallbackDougie();
+    ctx.drawImage(
+      currentImage,
+      dougie.x,
+      dougie.y,
+      dougie.width,
+      dougie.height
+    );
   }
 
   // Uncomment if you want to see the catch circle for testing
@@ -726,15 +667,37 @@ function drawStartScreen() {
   ctx.textAlign = "center";
 
   ctx.font = "bold 36px Arial";
-  ctx.fillText("Dougie's Pinecone Catch", canvas.width / 2, canvas.height / 2 - 60);
+  ctx.fillText(
+    "Dougie's Pinecone Catch",
+    canvas.width / 2,
+    canvas.height / 2 - 60
+  );
 
   ctx.font = "20px Arial";
-  ctx.fillText("Catch pinecones with the top of Dougie's head.", canvas.width / 2, canvas.height / 2 - 18);
-  ctx.fillText("Press Space to jump while playing.", canvas.width / 2, canvas.height / 2 + 12);
-  ctx.fillText("Avoid the rotten ones.", canvas.width / 2, canvas.height / 2 + 42);
+  ctx.fillText(
+    "Catch pinecones with the top of Dougie's head.",
+    canvas.width / 2,
+    canvas.height / 2 - 18
+  );
+
+  ctx.fillText(
+    "Press Space to jump while playing.",
+    canvas.width / 2,
+    canvas.height / 2 + 12
+  );
+
+  ctx.fillText(
+    "Avoid the rotten ones.",
+    canvas.width / 2,
+    canvas.height / 2 + 42
+  );
 
   ctx.font = "bold 22px Arial";
-  ctx.fillText("Press Space to Start", canvas.width / 2, canvas.height / 2 + 92);
+  ctx.fillText(
+    "Press Space to Start",
+    canvas.width / 2,
+    canvas.height / 2 + 92
+  );
 }
 
 function drawGameOverScreen() {
@@ -745,14 +708,31 @@ function drawGameOverScreen() {
   ctx.textAlign = "center";
 
   ctx.font = "bold 38px Arial";
-  ctx.fillText("Time's Up!", canvas.width / 2, canvas.height / 2 - 35);
+  ctx.fillText(
+    "Time's Up!",
+    canvas.width / 2,
+    canvas.height / 2 - 35
+  );
 
   ctx.font = "22px Arial";
-  ctx.fillText(`Final Score: ${score}`, canvas.width / 2, canvas.height / 2 + 5);
-  ctx.fillText(`High Score: ${highScore}`, canvas.width / 2, canvas.height / 2 + 35);
+  ctx.fillText(
+    `Final Score: ${score}`,
+    canvas.width / 2,
+    canvas.height / 2 + 5
+  );
+
+  ctx.fillText(
+    `High Score: ${highScore}`,
+    canvas.width / 2,
+    canvas.height / 2 + 35
+  );
 
   ctx.font = "bold 22px Arial";
-  ctx.fillText("Press Space or Jump to Play Again", canvas.width / 2, canvas.height / 2 + 85);
+  ctx.fillText(
+    "Press Space or Jump to Play Again",
+    canvas.width / 2,
+    canvas.height / 2 + 85
+  );
 }
 
 // ----------------------
@@ -942,6 +922,57 @@ setupMobileButton(
   null
 );
 
-updateHUD();
-draw();
-requestAnimationFrame(loop);
+// ----------------------
+// PRELOAD SPRITES + START GAME LOOP
+// ----------------------
+function startGameLoopWhenSpritesAreReady() {
+  const sprites = [
+    { name: "Dougie idle", image: dougieStand },
+    { name: "Dougie jump", image: dougieJump },
+    { name: "Dougie run left", image: dougieRunLeft },
+    { name: "Dougie run right", image: dougieRunRight }
+  ];
+
+  let remaining = sprites.length;
+  let loopStarted = false;
+
+  function spriteFinishedLoading(name, image) {
+    if (!imageIsReady(image)) {
+      console.error(`Could not load ${name}: ${image.src}`);
+    }
+
+    remaining--;
+
+    if (remaining === 0 && !loopStarted) {
+      loopStarted = true;
+
+      updateHUD();
+      draw();
+
+      requestAnimationFrame(loop);
+    }
+  }
+
+  for (const sprite of sprites) {
+    // If the browser already loaded/cached the image,
+    // count it immediately.
+    if (sprite.image.complete) {
+      spriteFinishedLoading(sprite.name, sprite.image);
+      continue;
+    }
+
+    sprite.image.addEventListener(
+      "load",
+      () => spriteFinishedLoading(sprite.name, sprite.image),
+      { once: true }
+    );
+
+    sprite.image.addEventListener(
+      "error",
+      () => spriteFinishedLoading(sprite.name, sprite.image),
+      { once: true }
+    );
+  }
+}
+
+startGameLoopWhenSpritesAreReady();

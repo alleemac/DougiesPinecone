@@ -148,8 +148,10 @@ function createGoldenSpawnFrames() {
   // Two golden pinecones per game, spaced apart
   const first = getRandomInt(8 * 60, 20 * 60);
   const second = getRandomInt(25 * 60, 40 * 60);
+    const third = getRandomInt(23 * 60, 32 * 60);
+  const fourth = getRandomInt(33 * 60, 42 * 60);
 
-  return [first, second];
+  return [first, second, third, fourth];
 }
 
 function chooseNewPaceMode() {
@@ -770,7 +772,7 @@ function update(currentTime) {
   if (frameCount % spawnRate === 0) {
     const badChance = Math.random();
 
-    if (badChance < 0.14) {
+    if (badChance < 0.25) {
       spawnItem("bad");
     } else {
       spawnItem("pinecone");

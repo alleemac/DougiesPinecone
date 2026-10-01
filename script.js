@@ -30,7 +30,7 @@ let highScore = getSavedHighScore();
 // Replace these placeholder filenames with your actual PNGs
 // ----------------------
 const dougieStand = new Image();
-dougieStand.src = "Dougie-Pixel-sprite-idle.png";
+dougieStand.src = "Dougie-Pixel-sprite-idle.PNG";
 
 const dougieJump = new Image();
 dougieJump.src = "dougiejump.png";
@@ -42,10 +42,10 @@ const dougieRunRight = new Image();
 dougieRunRight.src = "dougierunright.png";
 
 const dougieBasket = new Image();
-dougieBasket.src = "[insert-dougie-with-basket.png]";
+dougieBasket.src = "Dougie-Pixel-sprite-idle.PNG";
 
 const dougieHappy = new Image();
-dougieHappy.src = "[insert-happy-dougie.png]";
+dougieHappy.src = "Dougie-Pixel-sprite-idle.PNG";
 
 // ----------------------
 // GAME STATE

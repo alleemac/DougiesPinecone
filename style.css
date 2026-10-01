@@ -1,0 +1,132 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, #dff5ff 0%, #d9f3d0 45%, #b8df9e 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.game-wrapper {
+  text-align: center;
+  background: #f8fff4;
+  padding: 22px;
+  border-radius: 18px;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.14);
+  border: 4px solid #2f6b2f;
+  max-width: 860px;
+  width: 95%;
+}
+
+h1 {
+  margin: 0 0 12px;
+  color: #245126;
+  font-size: 2rem;
+}
+
+.hud {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  font-weight: bold;
+  color: #6a4120;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.instructions {
+  font-size: 0.95rem;
+  color: #444;
+  margin-bottom: 14px;
+  line-height: 1.4;
+}
+
+canvas {
+  display: block;
+  margin: 0 auto;
+  border: 4px solid #2f6b2f;
+  border-radius: 14px;
+  background: #cfeec4;
+  max-width: 100%;
+  height: auto;
+}
+
+.mobile-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 14px auto 0;
+  max-width: 700px;
+  touch-action: manipulation;
+}
+
+.control-button {
+  border: 3px solid #2f6b2f;
+  background: #f6d06f;
+  color: #245126;
+  font-size: 1.6rem;
+  font-weight: bold;
+  border-radius: 14px;
+  width: 78px;
+  height: 58px;
+  cursor: pointer;
+  box-shadow: 0 5px 0 #9e7131;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.control-button:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 #9e7131;
+}
+
+.jump-button {
+  width: 120px;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.restart-note {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+@media (min-width: 800px) {
+  .mobile-controls {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .game-wrapper {
+    padding: 14px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .hud {
+    gap: 10px;
+    font-size: 0.9rem;
+  }
+
+  .instructions {
+    font-size: 0.85rem;
+  }
+
+  .control-button {
+    width: 68px;
+    height: 54px;
+    font-size: 1.4rem;
+  }
+
+  .jump-button {
+    width: 105px;
+    font-size: 1rem;
+  }
+}

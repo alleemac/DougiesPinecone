@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dougie's Pinecone Catch</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="game-wrapper">
+    <h1>Dougie's Pinecone Catch</h1>
+
+    <div class="hud">
+      <div id="score">Score: 0</div>
+      <div id="highScore">High Score: 0</div>
+      <div id="misses">Time Left: 45s</div>
+    </div>
+
+    <div class="instructions">
+      Use the left and right arrow keys to help Dougie catch pinecones with the top of his head.
+      Press space to jump!
+      Golden pinecones are worth 5 points. Avoid the rotten pinecones!
+    </div>
+
+    <canvas id="gameCanvas" width="700" height="500"></canvas>
+
+    <div class="mobile-controls" aria-label="Mobile game controls">
+      <button id="leftButton" class="control-button" type="button">←</button>
+      <button id="jumpButton" class="control-button jump-button" type="button">Jump</button>
+      <button id="rightButton" class="control-button" type="button">→</button>
+    </div>
+
+    <div class="restart-note">Press space to start, jump, or restart.</div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
